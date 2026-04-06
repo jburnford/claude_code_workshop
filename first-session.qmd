@@ -148,6 +148,10 @@ Within a session, Claude Code remembers everything. You can build iteratively:
 
 This conversational flow is where Claude Code becomes much more powerful than a web chatbot. It accumulates understanding across the session.
 
+## Ask Questions --- Lots of Them
+
+The best way to learn is by asking Claude Code questions. If you do not understand something --- a Python error, a file format, what a column means --- ask. If you are not sure how to approach a task, describe what you want and let Claude Code suggest an approach. There is no cost to curiosity here. The more you ask, the more you learn, and the better Claude Code understands what you are trying to do.
+
 ## When It Gets Something Wrong
 
 Claude Code will sometimes make mistakes. Correct it directly:

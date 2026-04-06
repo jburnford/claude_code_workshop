@@ -111,6 +111,7 @@ By the end of this exercise, you should have:
 
 ## Next Steps
 
+- **Keep asking questions.** The best way to learn CIDOC-CRM, RDF, or any data science tool is to keep working with Claude Code on your own data. Ask it to explain concepts you do not understand. Ask it why it chose one class over another. Ask it to compare approaches. Every question teaches you something and costs almost nothing.
 - **Your own data**: Try the same workflow with a dataset from your own research
 - **LINCS submission**: If you want to contribute to LINCS, the validation skill can help ensure your data meets their requirements
 - **SPARQL queries**: Use `/lincs-sparql` to query existing LINCS data and see how other projects have modeled similar entities

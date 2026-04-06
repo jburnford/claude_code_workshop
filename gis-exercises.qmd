@@ -111,6 +111,10 @@ This exercise requires the full GeoPackage file (74 MB), which is too large to i
 The spatial exercises are optional. Exercises 1--4 and all of Part 2 work with the CSV files included in the workshop repository.
 :::
 
+## If You Get Stuck
+
+If something is not working --- Python is not installed, a library is missing, a command throws an error --- ask Claude Code. Describe the problem in plain language: "I got this error when I tried to run the script, what's wrong?" Troubleshooting is one of the things it does best, and learning to debug with Claude Code is just as valuable as learning to analyze data with it.
+
 ## Reflection
 
 Before we break, take a moment to consider:
