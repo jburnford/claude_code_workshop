@@ -137,7 +137,7 @@
     "href": "hands-on.html#next-steps",
     "title": "HGIS-to-LINCS Exercise",
     "section": "Next Steps",
-    "text": "Next Steps\n\nYour own data: Try the same workflow with a dataset from your own research\nLINCS submission: If you want to contribute to LINCS, the validation skill can help ensure your data meets their requirements\nSPARQL queries: Use /lincs-sparql to query existing LINCS data and see how other projects have modeled similar entities\nExplore the skills repository: The full set of skills is at github.com/jburnford/lincs_skills — fork it and adapt the skills to your own domain"
+    "text": "Next Steps\n\nKeep asking questions. The best way to learn CIDOC-CRM, RDF, or any data science tool is to keep working with Claude Code on your own data. Ask it to explain concepts you do not understand. Ask it why it chose one class over another. Ask it to compare approaches. Every question teaches you something and costs almost nothing.\nYour own data: Try the same workflow with a dataset from your own research\nLINCS submission: If you want to contribute to LINCS, the validation skill can help ensure your data meets their requirements\nSPARQL queries: Use /lincs-sparql to query existing LINCS data and see how other projects have modeled similar entities\nExplore the skills repository: The full set of skills is at github.com/jburnford/lincs_skills — fork it and adapt the skills to your own domain"
   },
   {
     "objectID": "first-session.html",
@@ -187,6 +187,13 @@
     "title": "Your First Session",
     "section": "Building on Context",
     "text": "Building on Context\nWithin a session, Claude Code remembers everything. You can build iteratively:\n&gt; Read data/boundaries_poly.csv and describe its structure\n\n[Claude Code responds]\n\n&gt; How many distinct sovereign entities appear in this dataset?\n\n[answers based on what it already read]\n\n&gt; Which territories changed sovereignty most frequently?\nThis conversational flow is where Claude Code becomes much more powerful than a web chatbot. It accumulates understanding across the session."
+  },
+  {
+    "objectID": "first-session.html#ask-questions-lots-of-them",
+    "href": "first-session.html#ask-questions-lots-of-them",
+    "title": "Your First Session",
+    "section": "Ask Questions — Lots of Them",
+    "text": "Ask Questions — Lots of Them\nThe best way to learn is by asking Claude Code questions. If you do not understand something — a Python error, a file format, what a column means — ask. If you are not sure how to approach a task, describe what you want and let Claude Code suggest an approach. There is no cost to curiosity here. The more you ask, the more you learn, and the better Claude Code understands what you are trying to do."
   },
   {
     "objectID": "first-session.html#when-it-gets-something-wrong",
@@ -299,6 +306,13 @@
     "title": "GIS Data Exercises",
     "section": "Exercise 5: Spatial Queries (Advanced)",
     "text": "Exercise 5: Spatial Queries (Advanced)\nThis exercise requires the full GeoPackage file (74 MB), which is too large to include in the workshop repository. Ask the workshop facilitator for a copy, or download it from the link provided during the session. Place it in your data/ folder. You will also need geopandas installed (pip install geopandas).\n&gt; Using geopandas, read the boundaries_poly layer from\n&gt; data/canada_boundaries_temporal.gpkg. Calculate the approximate\n&gt; area of each territory in 1867 (Confederation year).\n&gt; Which was largest?\n&gt; Create a simple map showing Canadian territorial boundaries in 1867.\n&gt; Use different colors for each sovereign. Save as confederation_1867.png.\n\n\n\n\n\n\nSkip this if you like\n\n\n\nThe spatial exercises are optional. Exercises 1–4 and all of Part 2 work with the CSV files included in the workshop repository."
+  },
+  {
+    "objectID": "gis-exercises.html#if-you-get-stuck",
+    "href": "gis-exercises.html#if-you-get-stuck",
+    "title": "GIS Data Exercises",
+    "section": "If You Get Stuck",
+    "text": "If You Get Stuck\nIf something is not working — Python is not installed, a library is missing, a command throws an error — ask Claude Code. Describe the problem in plain language: “I got this error when I tried to run the script, what’s wrong?” Troubleshooting is one of the things it does best, and learning to debug with Claude Code is just as valuable as learning to analyze data with it."
   },
   {
     "objectID": "gis-exercises.html#reflection",
