@@ -6,11 +6,13 @@ project:
     - "!intro_llms_for_historians/"
 
 website:
-  title: "Claude Code for HGIS-to-LINCS"
+  title: "HGIS to LOD Workshop"
   navbar:
     left:
+      - href: workshop-event.qmd
+        text: Workshop (April 15--17)
       - href: index.qmd
-        text: Home
+        text: Claude Code Pre-Workshop (April 11)
       - href: what-is-claude-code.qmd
         text: What Is Claude Code?
       - href: data-ethics.qmd

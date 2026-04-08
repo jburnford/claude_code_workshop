@@ -3,6 +3,10 @@ title: "Claude Code for HGIS-to-LINCS"
 subtitle: "A hands-on workshop for historians converting historical GIS data to Linked Open Data"
 ---
 
+::: {.callout-note}
+This is an online pre-workshop session for the **[HGIS to LOD Workshop](workshop-event.qmd)** taking place April 15--17 in Ottawa.
+:::
+
 ## What This Workshop Is
 
 This workshop teaches you to use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) --- Anthropic's command-line AI assistant --- to work with Historical GIS data and convert it into [LINCS](https://lincsproject.ca/)-compatible Linked Open Data. No programming experience is required.

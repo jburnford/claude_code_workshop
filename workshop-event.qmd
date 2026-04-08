@@ -1,0 +1,106 @@
+---
+title: "HGIS to LOD Workshop"
+subtitle: "A hands-on workshop for converting Historical GIS data to Linked Open Data"
+---
+
+## Event Details
+
+| | |
+|---|---|
+| **Dates** | Wednesday, April 15 -- Friday, April 17, 2026 |
+| **Location** | Room 302, [Pérez Hall (PRZ)](https://www.uottawa.ca/about-us/administration-services/facilities/campus-maps/building/perez-hall), 610 Cumberland Street, University of Ottawa |
+
+### Schedule
+
+| Day | Time |
+|-----|------|
+| **Wednesday, April 15** | 1:00 PM -- 4:30 PM |
+| **Thursday, April 16** | 9:00 AM -- 5:30 PM |
+| **Friday, April 17** | 9:00 AM -- 12:00 PM |
+
+### Meals & Social
+
+- **Wednesday**: PRZ 302 is open from 12:00 PM if you'd like to bring a lunch and join us before the workshop starts. After the session, drinks at [Nostalgica](https://www.nostalgica.ca/) (student union pub) --- all welcome.
+- **Thursday lunch**: 12:00--1:30 PM break (not included --- on your own).
+- **Thursday dinner**: 7:00 PM at [Tucker's Marketplace](https://tuckersmarketplace.com/). Dinner is covered for students, staff, and new scholars (alcohol not included). Groups will leave from Nostalgica.
+
+## About the Workshop
+
+This hands-on workshop brings together historians and digital humanists to work through the process of converting Historical GIS data into [LINCS](https://lincsproject.ca/)-compatible Linked Open Data. Over three days, participants will:
+
+- **Review CIDOC-CRM modeling** for geospatial, people, and institutional data
+- **Work with their own data** --- transforming datasets using temporary URIs, vocabularies, and entity linking
+- **Use AI-assisted tools** including [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and the Wikidata MCP for entity disambiguation
+- **Discuss the broader ecosystem** --- CRKN perspectives, researcher workflows, and paths to contribution
+
+## Before You Arrive
+
+### Online Pre-Workshop: Claude Code (Friday, April 11)
+
+Before the in-person workshop, join the **[Claude Code for HGIS-to-LINCS](index.qmd)** online session on Friday, April 11. This session introduces Claude Code and walks through the tools we will use during the data-focused sessions in Ottawa.
+
+Please complete the **[Installation](installation.qmd)** steps before Friday's session. This includes creating an Anthropic account and installing Claude Code. If you run into trouble, bring your laptop to Ottawa and we will help you get set up.
+
+## Detailed Schedule
+
+*This schedule is a draft and subject to change.*
+
+### Wednesday, April 15 (1:00--4:30 PM)
+
+| Time | Session |
+|------|---------|
+| 12:00--1:00 | Meet and greet brown bag lunch (bring your own) |
+| 1:00 | Overview and grounding in larger goals (Jim) |
+| | Modeling (Susan) --- CIDOC recap and Q&A |
+| | Geospatial and place: places vs. presences, identifying gaps |
+| | People and groups --- examples |
+| | Indigenous knowledge and vocabularies |
+| 4:15 | Wrap-up |
+
+### Thursday, April 16 (9:00 AM--5:30 PM)
+
+*Data-focused workshop day*
+
+| Time | Session |
+|------|---------|
+| 9:00 | Resource overview, setup, best practices and strategies |
+| | Transform data with temporary URIs |
+| 12:00--1:30 | Lunch (not included) |
+| 1:30 | Vocabularies, entity linking, and methods (Claude / Wikidata MCP, NERVE) |
+| | Verification of results |
+| | Group reporting: progress to date, pain points, feasibility for researchers |
+| 5:30 | End of day |
+| 7:00 PM | Dinner at Tucker's Marketplace |
+
+### Friday, April 17 (9:00 AM--12:00 PM)
+
+| Time | Session |
+|------|---------|
+| 9:00 | Reflections --- lessons learned, gaps and challenges discovered |
+| | **Ecosystem / CRKN Panel** (Jim, chair): James (CRKN perspective), Connie (researcher perspective), Ken (library perspective) |
+| | Tools sharing: LINCS, NERVE, SPARQL, geo-oriented tools |
+| | Brainstorming: how do researchers contribute? Training, workflows, linking across models |
+| 11:30--12:00 | Next steps and wrap-up |
+
+## Workshop Materials
+
+The full workshop curriculum is available on this site:
+
+- [What Is Claude Code?](what-is-claude-code.qmd) --- orientation and key concepts
+- [Data Ethics and Privacy](data-ethics.qmd) --- OCAP, sensitive data, and what not to share
+- [Your First Session](first-session.qmd) --- guided walkthrough
+- [GIS Data Exercises](gis-exercises.qmd) --- exploring and analyzing HGIS data
+- [LINCS Skills](lincs-skills.qmd) --- loading domain expertise for LOD work
+- [HGIS-to-LINCS Exercise](hands-on.qmd) --- converting GIS data to CIDOC-CRM / RDF
+
+## Organizers
+
+Jim Clifford and Susan Brown
+
+**Local coordinator:** Alice Defours ([adefo038@uottawa.ca](mailto:adefo038@uottawa.ca))
+
+**LINCS staff:** Alliyya Mo, Natalie Hervieux, Dani Metilli
+
+## Questions?
+
+Contact Jim Clifford at [jim.clifford@usask.ca](mailto:jim.clifford@usask.ca).
