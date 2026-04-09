@@ -111,7 +111,7 @@ By the end of this exercise, you should have:
 
 ## Next Steps
 
-- **Keep asking questions.** The best way to learn CIDOC-CRM, RDF, or any data science tool is to keep working with Claude Code on your own data. Ask it to explain concepts you do not understand. Ask it why it chose one class over another. Ask it to compare approaches. Every question teaches you something and costs almost nothing.
+- **Keep asking questions.** The best way to learn CIDOC-CRM, RDF, or any data modelling framework is to keep working with your own data. Tools like Claude Code can accelerate this --- ask it to explain concepts, ask why it chose one class over another, ask it to compare approaches. But the real learning comes from constantly asking yourself where the tool is going off the rails. What did it get right? What is plausible-sounding nonsense? This is a different kind of critical thinking than most historians are trained in, and it is not always comfortable. Treat the output as a first draft from a confident but unreliable research assistant, not as an authority.
 - **Your own data**: Try the same workflow with a dataset from your own research
 - **LINCS submission**: If you want to contribute to LINCS, the validation skill can help ensure your data meets their requirements
 - **SPARQL queries**: Use `/lincs-sparql` to query existing LINCS data and see how other projects have modeled similar entities

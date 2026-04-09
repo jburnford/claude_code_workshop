@@ -26,12 +26,14 @@ If your research involves Indigenous data, consult with the relevant community a
 
 ## What Subscriber Privacy Actually Means
 
-Anthropic and OpenAI offer different privacy tiers:
+AI providers vary widely in how they handle your data, and the details matter:
 
-- **Free tier**: Your conversations may be used to train future models
-- **Paid API / subscriber tier**: Your data is generally not used for training, and is subject to data retention policies (typically 30 days for abuse monitoring, then deleted)
+- **Anthropic** uses an opt-in model: your data is **not** used for training unless you choose to allow it. This applies to both free and paid tiers.
+- **OpenAI, xAI, Perplexity, and others** use an opt-out model: your data **is** used for training by default, even on paid plans, unless you find the setting and turn it off. Many users do not know this.
 
-This is meaningfully better, but it does not mean your data is private in the way that data on your own computer is private. Even with a paid subscription:
+Do not assume that paying for a subscription protects your data. Check the specific provider's settings and policies.
+
+Even with training opt-out enabled, your data is not private in the way that data on your own computer is private:
 
 - Your data is transmitted over the internet to the provider's servers
 - It is processed on infrastructure you do not control
@@ -43,26 +45,23 @@ This is meaningfully better, but it does not mean your data is private in the wa
 
 ## What Is Safe to Use
 
-As a rough guide, data that is already openly published on the web is likely already in AI training data, so sending it to Claude Code creates little additional exposure. Government census records, published GIS datasets, and your own writing are generally straightforward.
+There is no simple checklist. Every dataset requires you to consider who has rights over it, what restrictions apply, and whether sending it to a cloud service is appropriate.
 
-But "publicly available" does not mean "free to use however you like." Indigenous communities that shared data online did not consent to that data being ingested by AI companies. The fact that something is technically accessible does not settle the ethical question. We are still learning where these boundaries are, and historians should err on the side of caution rather than assume that public availability equals permission.
+As a rough guide, data that you created yourself --- your own notes, your own writing, your own code --- is straightforward. Open government datasets explicitly published for reuse (like the Canada boundaries data we use in this workshop) are generally fine, but check the licence. Beyond that, the answer depends on the specific data and context.
 
-**Generally straightforward:**
-
-- Government records, published census data, newspaper archives
-- Open datasets from government portals (the Canada boundaries data we use in this workshop, for example)
-- Your own writing and notes
+"Publicly available" does not mean "free to use however you like." Newspaper archives may be under copyright. Government records are sometimes restricted or not open by default in all jurisdictions. Indigenous communities that shared data online did not consent to that data being ingested by AI companies. The fact that something is technically accessible does not settle the ethical question.
 
 **Use with care:**
 
-- Data produced by or about Indigenous communities --- even if publicly available online. OCAP principles apply to the relationship, not just the access method.
 - Archival materials with access restrictions or donor agreements
 - Oral history transcripts (informed consent may not have covered AI processing)
 - Data collected under research ethics protocols --- check whether your protocol permits cloud processing
 - Unpublished research data
+- Published materials that may be under copyright (newspaper archives, published books, etc.)
 
 **Do not use without explicit authorization:**
 
+- Data produced by or about Indigenous communities --- even if publicly available online. OCAP principles apply to the relationship, not just the access method.
 - Data held in trust under OCAP or community data governance agreements
 - Health or medical records
 - Personal information about living individuals
