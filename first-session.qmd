@@ -95,14 +95,6 @@ Claude Code reads the file directly from disk --- no copying, no pasting. It rep
 
 It draws on its general knowledge. Later, when we load the CIDOC-CRM skill, its answers become much more precise.
 
-### Ask it to explore data
-
-```
-> What files are in the data/ directory? Describe what each one contains.
-```
-
-If you have copied the workshop data files into your working directory, Claude Code will read them and report on their structure.
-
 ## Essential Commands
 
 | Command | What it does |
@@ -130,23 +122,100 @@ Allow? (y/n/a)
 Pressing **a** when prompted saves time during the workshop. But get in the habit of reading what Claude Code wants to do before approving, especially for commands. The permission system is a safeguard, not a guarantee --- if you approve a destructive command without reading it, there is no undo.
 :::
 
-## Building on Context
+## A Real Task: Quebec Arrivals, 1817--1839
 
-Within a session, Claude Code remembers everything. You can build iteratively:
+Toy examples get boring fast. Let's give Claude Code a real historical dataset and watch it figure out the rest. The **Quebec Arrivals Database** is an open dataset of 17,783 ship arrivals at Quebec City between 1817 and 1839, transcribed from *The Quebec Gazette / La Gazette de Québec*. It lives on Zenodo at <https://doi.org/10.5281/zenodo.15068764>.
+
+Type this at the `>` prompt:
 
 ```
-> Read data/boundaries_poly.csv and describe its structure
-
-[Claude Code responds]
-
-> How many distinct sovereign entities appear in this dataset?
-
-[answers based on what it already read]
-
-> Which territories changed sovereignty most frequently?
+> Download the Quebec Arrivals dataset from
+> https://doi.org/10.5281/zenodo.15068764 into a data/ folder.
+> Then tell me the top 5 merchants and the top 5 ports of departure,
+> and how each of them changed over the period covered by the dataset.
 ```
 
-This conversational flow is where Claude Code becomes much more powerful than a web chatbot. It accumulates understanding across the session.
+Hit Enter and watch what happens.
+
+Claude Code will figure out how to resolve the DOI, download the Excel file, read it, group and count the columns, and report back. It may need to install a small Python package to parse `.xlsx` --- approve the permission when prompted. If it asks how you'd like the changes-over-time presented, suggest a table or a chart.
+
+### Now Refine It
+
+Once it has answered, push it further. Each follow-up builds on what it already knows:
+
+```
+> Which merchant grew the most between 1820 and 1835?
+```
+
+```
+> Were there any years where the dominant port of departure shifted
+> suddenly? What might have caused that historically?
+```
+
+```
+> Save a chart of the top 5 ports by year as data/ports_over_time.png
+```
+
+This is the analysis pattern you will use throughout the workshop: hand Claude Code a dataset, ask a high-level question, then refine.
+
+## A Second Task: Grab 10 Things from the Internet Archive
+
+The first task was about analysis. This one is about file wrangling --- using Claude Code to talk to a public API and pull files down to your machine. No setup, no API keys, no installed packages --- just describe what you want in plain English.
+
+Type this at the `>` prompt:
+
+```
+> Download 10 items about Saskatoon from the Internet Archive into a new
+> data/archive/ folder. For each item, save the title, date, and a short
+> description so I can see what you got.
+```
+
+That's it. No URL, no field names, no script. Hit Enter and watch what happens.
+
+Claude Code will:
+
+- Figure out that the Internet Archive has a search API (and which endpoint to use)
+- Write a small script or shell loop to query it
+- Ask permission to run the script
+- Create the `data/archive/` folder
+- Pull the items and report back with a summary
+
+You will see permission prompts along the way. Read each one --- if it looks reasonable, press **y** (or **a** to allow that command for the rest of the session).
+
+### Now Refine It
+
+Once it's done, try adding follow-up instructions. Each one builds on what Claude Code already knows about the folder you just created:
+
+```
+> Show me the titles and dates as a table
+```
+
+```
+> Skip any item over 50 MB and re-download
+```
+
+```
+> Now do the same thing for "Regina" instead of "Saskatoon"
+```
+
+You don't have to finish your thought before pressing Enter. If Claude Code does something you didn't intend, just tell it:
+
+```
+> Actually, only keep items from before 1950
+```
+
+It remembers what you've done so far and adjusts.
+
+### What just happened
+
+In a handful of plain-English prompts, you:
+
+1. Hit a real third-party API
+2. Got a working script written and executed for you
+3. Saved real files to your machine
+4. Iteratively shaped the result without ever opening a code editor
+
+This is the workshop in miniature. You describe a goal, Claude Code picks an approach, you inspect the result, and you refine. The same pattern works for everything that follows.
 
 ## Ask Questions --- Lots of Them
 
@@ -157,19 +226,26 @@ The best way to learn is by asking Claude Code questions. If you do not understa
 Claude Code will sometimes make mistakes. Correct it directly:
 
 ```
-> That's not right — Rupert's Land was controlled by the Hudson's Bay
-> Company, not directly by Britain. Check the sovereign column again.
+> That's not right --- the JSON response wraps the list under
+> response.docs, not at the top level. Re-read the file and try again.
 ```
 
 It adjusts and remembers the correction. This is a normal part of working with any LLM.
 
 ## Exercise: Explore on Your Own (5 minutes)
 
-Try any of these, or make up your own:
+Pick whichever dataset you found more interesting and push it further. A few ideas:
 
-1. Ask Claude Code to count the number of boundary changes per century
-2. Ask it to list all the treaties mentioned in the `boundary_changes` table
-3. Ask it to explain the significance of the Royal Proclamation of 1763
-4. Ask it "What would a historian find most interesting about this dataset?"
+**Quebec Arrivals**
+
+1. Ask Claude Code which months of the year saw the most arrivals --- and how that pattern shifted across the period.
+2. Ask it to map the top 10 ports of departure to modern country names.
+3. Ask: *"What do these arrival patterns tell us about the timber trade?"*
+
+**Internet Archive**
+
+1. Re-run the search with a different term --- your hometown, a historical figure, a publication.
+2. Ask Claude Code to pull the OCR text from any "texts" items and report the most common nouns.
+3. Ask: *"What would a historian find most interesting about this set of items?"*
 
 When you are comfortable with the basics, move on to **[GIS Data Exercises](gis-exercises.qmd)**.

@@ -14,7 +14,7 @@ Claude Code now offers four ways to interact with the same underlying tool:
 
 All four share the same skills, slash commands, and file-access behaviour. The workshop instructions assume the terminal, but if you prefer one of the other interfaces you can follow along --- the prompts and skills work identically. We are happy to help you get any of them running at the start of the session.
 
-If you would rather use OpenAI's coding agent instead, see [Option C: Codex](#option-c-codex-openai-alternative) below.
+If you would rather use OpenAI's coding agent instead, see [Option B: Codex](#option-b-codex-openai-alternative) below.
 
 ::: {.callout-important}
 ## Windows users
@@ -96,6 +96,74 @@ To install git for future use: [git-scm.com/downloads](https://git-scm.com/downl
 
 This `lincs_skills` folder is where we will work during the workshop.
 
+### Step 5: Set Up Python with a Virtual Environment
+
+Several of the workshop exercises ask Claude Code to write and run Python scripts (for analysis, visualization, and converting GIS data to RDF). To keep these dependencies tidy and avoid conflicts with other Python projects on your machine, we will use a **virtual environment** (venv) inside the workshop folder.
+
+#### 5a. Make sure you have Python 3.10 or newer
+
+Check the version:
+
+```bash
+python3 --version
+```
+
+If you see `Python 3.10.x` or higher, you are set. Otherwise install Python from [python.org/downloads](https://www.python.org/downloads/) (Mac/Windows) or your system package manager (Linux), then restart your terminal.
+
+::: {.callout-note}
+## Windows note
+On Windows the command is usually `python` (without the `3`). If `python --version` does not work, install Python from [python.org](https://www.python.org/downloads/) and **check the box "Add Python to PATH"** during installation.
+:::
+
+#### 5b. Create the virtual environment
+
+From inside the `lincs_skills` folder, run:
+
+```bash
+python3 -m venv .venv
+```
+
+(Use `python` instead of `python3` on Windows.)
+
+This creates a hidden `.venv/` folder containing an isolated Python install.
+
+#### 5c. Activate the virtual environment
+
+**macOS / Linux / WSL:**
+
+```bash
+source .venv/bin/activate
+```
+
+**Windows PowerShell:**
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+**Windows CMD:**
+
+```batch
+.venv\Scripts\activate.bat
+```
+
+After activation, your prompt should show `(.venv)` at the beginning. You will need to re-run this activation command **every time you open a new terminal** for the workshop.
+
+#### 5d. Install the workshop packages
+
+With the venv active, install everything we need in one go:
+
+```bash
+pip install pandas matplotlib geopandas rdflib
+```
+
+This pulls in `pandas`, `matplotlib`, `geopandas` (plus its spatial dependencies `shapely`, `fiona`, `pyproj`), and `rdflib` for the RDF conversion exercises. The download is about 100--200 MB and takes a couple of minutes.
+
+::: {.callout-tip}
+## Tell Claude Code about the venv
+When you start Claude Code in the `lincs_skills` folder, mention the venv at the start of your first session: *"I have a Python virtual environment in `.venv/`. Please use it when running Python scripts."* Claude will then activate it automatically before running anything.
+:::
+
 ### Troubleshooting
 
 - **"command not found" after install** --- Close and reopen your terminal so it picks up the new `claude` binary on your PATH.
@@ -104,37 +172,47 @@ This `lincs_skills` folder is where we will work during the workshop.
 
 ### Checklist
 
-- [ ] Anthropic API key created
+- [ ] Claude Pro (or Max/Team/Enterprise) account ready
 - [ ] `claude --version` shows a version number
-- [ ] `claude` launches successfully (then `/exit`)
+- [ ] `claude` launches and signs you in through the browser (then `/exit`)
 - [ ] You have cloned `lincs_skills`
+- [ ] `python3 --version` shows 3.10 or newer
+- [ ] You have created and activated a `.venv` inside `lincs_skills`
+- [ ] `pip install pandas matplotlib geopandas rdflib` completed without errors
 
 ---
 
-## Option C: Codex (OpenAI Alternative)
+## Option B: Codex (OpenAI Alternative)
 
-[Codex](https://chatgpt.com/codex) is OpenAI's coding agent. Like Claude Code, it can run in the terminal and read/write files on your machine. It also has a browser-based interface at [chatgpt.com/codex](https://chatgpt.com/codex) where tasks run in a cloud sandbox. It requires a ChatGPT Plus, Pro, or Team subscription.
+[Codex CLI](https://github.com/openai/codex) is OpenAI's coding agent. Like Claude Code, it runs in the terminal and reads/writes files on your machine. There is also a browser-based interface at [chatgpt.com/codex](https://chatgpt.com/codex) where tasks run in a cloud sandbox. Codex requires a ChatGPT **Plus, Pro, Business, Edu, or Enterprise** subscription (or, with extra setup, an OpenAI API key).
 
-### Terminal Install
+### Step 1: Ensure You Have ChatGPT Access
 
-```bash
-npm install -g codex
-```
+If you already have a paid ChatGPT plan you are set. If not, sign up at [chatgpt.com](https://chatgpt.com/).
 
-Then launch it in the workshop directory:
+### Step 2: Install Codex CLI
+
+The easiest install paths are:
+
+- **macOS (Homebrew)**: `brew install --cask codex`
+- **Any platform with Node.js 18+**: `npm install -g @openai/codex`
+- **Direct binary**: download from the [latest GitHub release](https://github.com/openai/codex/releases/latest)
+
+::: {.callout-note}
+## Codex still needs Node.js (if you go the npm route)
+Unlike Claude Code, the npm install of Codex requires [Node.js 18+](https://nodejs.org/). If you do not already have Node.js installed and you are not on macOS, the binary download is the simplest option.
+:::
+
+Then launch Codex in the workshop folder:
 
 ```bash
 cd lincs_skills
 codex
 ```
 
-It works similarly to Claude Code --- natural language instructions, file access, permission prompts. If you prefer the browser interface, go to [chatgpt.com/codex](https://chatgpt.com/codex) instead and upload files to each task.
+The first time you run it, choose **Sign in with ChatGPT** and complete the browser login.
 
-### Step 1: Ensure You Have ChatGPT Access
-
-Codex requires a ChatGPT Plus, Pro, or Team subscription. If you already have one, you are set. If not, you can sign up at [chatgpt.com](https://chatgpt.com/).
-
-### Step 2: Clone the Workshop Repository
+### Step 3: Clone the Workshop Repository
 
 ```bash
 git clone https://github.com/jburnford/lincs_skills.git
