@@ -196,11 +196,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   <li><a href="#checklist" id="toc-checklist" class="nav-link" data-scroll-target="#checklist">Checklist</a></li>
   </ul></li>
-  <li><a href="#set-up-the-workshop-folder" id="toc-set-up-the-workshop-folder" class="nav-link" data-scroll-target="#set-up-the-workshop-folder">Set Up the Workshop Folder</a></li>
-  <li><a href="#make-sure-python-and-venv-are-available" id="toc-make-sure-python-and-venv-are-available" class="nav-link" data-scroll-target="#make-sure-python-and-venv-are-available">Make Sure Python and <code>venv</code> Are Available</a>
+  <li><a href="#create-a-workshop-folder" id="toc-create-a-workshop-folder" class="nav-link" data-scroll-target="#create-a-workshop-folder">Create a Workshop Folder</a>
   <ul class="collapse">
-  <li><a href="#check-that-python-3.10-or-newer-is-installed" id="toc-check-that-python-3.10-or-newer-is-installed" class="nav-link" data-scroll-target="#check-that-python-3.10-or-newer-is-installed">1. Check that Python 3.10 or newer is installed</a></li>
-  <li><a href="#check-that-the-venv-module-is-available" id="toc-check-that-the-venv-module-is-available" class="nav-link" data-scroll-target="#check-that-the-venv-module-is-available">2. Check that the <code>venv</code> module is available</a></li>
   <li><a href="#workshop-folder-checklist" id="toc-workshop-folder-checklist" class="nav-link" data-scroll-target="#workshop-folder-checklist">Workshop Folder Checklist</a></li>
   </ul></li>
   <li><a href="#option-b-codex-openai-alternative" id="toc-option-b-codex-openai-alternative" class="nav-link" data-scroll-target="#option-b-codex-openai-alternative">Option B: Codex (OpenAI Alternative)</a>
@@ -259,6 +256,20 @@ Windows users
 <div class="callout-body-container callout-body">
 <p>On Windows, the smoothest path for a first-time terminal user is the <strong>Desktop app</strong> or the <strong>VS Code extension</strong> — both avoid the differences between PowerShell, CMD, and Git Bash. If you do want the terminal, Claude Code now requires <a href="https://git-scm.com/downloads/win">Git for Windows</a>; install it first.</p>
 <p>For longer-term use beyond this workshop, the best terminal experience on Windows is through <a href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux (WSL)</a>, which gives you a full Linux terminal inside Windows. Installing WSL is too large a step for a workshop, but it is worth doing on your own time if you plan to use Claude Code regularly.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading the code blocks in this guide
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every code block on <strong>this installation page</strong> is something you type into your <strong>system terminal</strong> (Terminal on macOS, PowerShell on Windows, your shell on Linux). Claude Code is not running yet, so everything has to be done by hand.</p>
+<p>Once you finish this page, you will only run a handful of terminal commands ever again. Almost everything from the <a href="./first-session.html">first session</a> onward happens <strong>inside Claude Code</strong> — you type prompts (lines that start with <code>&gt;</code>) and Claude does the work, including cloning repositories, creating virtual environments, and installing packages.</p>
 </div>
 </div>
 <hr>
@@ -323,90 +334,31 @@ About cost and usage limits
 <hr>
 </section>
 </section>
-<section id="set-up-the-workshop-folder" class="level2">
-<h2 class="anchored" data-anchor-id="set-up-the-workshop-folder">Set Up the Workshop Folder</h2>
-<p>These next two sections apply to <strong>everyone</strong> — Claude Code and Codex users alike. Complete them before the workshop.</p>
-<p>Create a folder called <code>claude_workshop</code> and move into it. This is where you will run your coding agent from for the rest of the workshop:</p>
+<section id="create-a-workshop-folder" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-workshop-folder">Create a Workshop Folder</h2>
+<p>This section applies to <strong>everyone</strong> — Claude Code and Codex users alike. It’s the last thing you need to do in your system terminal before the workshop. Everything else — cloning the skills repository, setting up Python, downloading data — will happen inside Claude Code itself in the <a href="./first-session.html">first session</a>.</p>
+<p>Create an empty folder called <code>claude_workshop</code> and move into it:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> claude_workshop</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> claude_workshop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then clone the LINCS skills repository <strong>as a subfolder</strong> of <code>claude_workshop</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/jburnford/lincs_skills.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Notice that we <strong>do not</strong> <code>cd</code> into <code>lincs_skills</code> — it lives alongside the data and venv we will set up next. The structure should look like this:</p>
-<pre><code>claude_workshop/
-├── lincs_skills/    ← cloned skills repository
-├── data/            ← workshop data (added later)
-└── .venv/           ← Python virtual environment (added next)</code></pre>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-If you don’t have git
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If <code>git clone</code> gives you “command not found,” you can download the repository manually:</p>
-<ol type="1">
-<li>Go to <a href="https://github.com/jburnford/lincs_skills">github.com/jburnford/lincs_skills</a></li>
-<li>Click the green <strong>Code</strong> button</li>
-<li>Click <strong>Download ZIP</strong></li>
-<li>Unzip the file into your <code>claude_workshop</code> folder</li>
-<li>Rename the unzipped folder from <code>lincs_skills-main</code> to <code>lincs_skills</code> so it matches the rest of the instructions</li>
-</ol>
-<p>To install git for future use: <a href="https://git-scm.com/downloads">git-scm.com/downloads</a></p>
-</div>
-</div>
-<hr>
-</section>
-<section id="make-sure-python-and-venv-are-available" class="level2">
-<h2 class="anchored" data-anchor-id="make-sure-python-and-venv-are-available">Make Sure Python and <code>venv</code> Are Available</h2>
-<p>Several of the workshop exercises ask the coding agent to write and run Python scripts. The agent will set up its own <strong>virtual environment</strong> during the first session, but it needs two things to already be on your machine: Python itself, and Python’s built-in <code>venv</code> module.</p>
-<p>You only need to confirm these are present. Claude Code will create the venv and install everything else once you start your first session.</p>
-<section id="check-that-python-3.10-or-newer-is-installed" class="level3">
-<h3 class="anchored" data-anchor-id="check-that-python-3.10-or-newer-is-installed">1. Check that Python 3.10 or newer is installed</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you see <code>Python 3.10.x</code> or higher, you are set. Otherwise install Python from <a href="https://www.python.org/downloads/">python.org/downloads</a> (Mac/Windows) or your system package manager (Linux), then restart your terminal.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Windows note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>On Windows the command is usually <code>python</code> (without the <code>3</code>). If <code>python --version</code> does not work, install Python from <a href="https://www.python.org/downloads/">python.org</a> and <strong>check the box “Add Python to PATH”</strong> during installation.</p>
-</div>
-</div>
-</section>
-<section id="check-that-the-venv-module-is-available" class="level3">
-<h3 class="anchored" data-anchor-id="check-that-the-venv-module-is-available">2. Check that the <code>venv</code> module is available</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you see a help message, you are good. If you see something like <code>No module named venv</code>, you are probably on a Debian or Ubuntu Linux system that ships <code>venv</code> separately. Install it with:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-venv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>On macOS and Windows, <code>venv</code> is included with the Python install from python.org — there is nothing extra to do.</p>
+<p>That’s the workshop folder. You will launch Claude Code from here, and Claude will fill it in (<code>lincs_skills/</code>, <code>.venv/</code>, <code>data/</code>) once you start your first session.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Why we don’t create the venv ourselves
+Don’t worry about Python yet
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Claude Code can run <code>python3 -m venv .venv</code> for you, and it can <code>pip install</code> packages inside that venv afterwards. What it generally <strong>cannot</strong> do is install Python itself or use <code>sudo</code> to install system packages. So your one job is to make sure the building blocks above are in place, and the agent will take care of the rest in the first session.</p>
+<p>You do <strong>not</strong> need to check whether Python is installed, install missing packages, or create a virtual environment yourself. The very first thing you will do in the first session is ask Claude Code to check what is on your machine and set up whatever is missing. If Python itself is not installed, Claude will tell you exactly what to do.</p>
 </div>
 </div>
-</section>
 <section id="workshop-folder-checklist" class="level3">
 <h3 class="anchored" data-anchor-id="workshop-folder-checklist">Workshop Folder Checklist</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">You have a <code>claude_workshop</code> folder containing a <code>lincs_skills/</code> subfolder</label></li>
-<li><label><input type="checkbox"><code>python3 --version</code> shows 3.10 or newer</label></li>
-<li><label><input type="checkbox"><code>python3 -m venv --help</code> runs without an error</label></li>
+<li><label><input type="checkbox">You have an empty <code>claude_workshop</code> folder somewhere convenient (e.g.&nbsp;your Desktop or home folder)</label></li>
+<li><label><input type="checkbox">You can open a terminal in that folder and the prompt shows you are inside it (try <code>pwd</code>)</label></li>
 </ul>
 <hr>
 </section>
@@ -439,10 +391,10 @@ Codex still needs Node.js (if you go the npm route)
 <p>Unlike Claude Code, the npm install of Codex requires <a href="https://nodejs.org/">Node.js 18+</a>. If you do not already have Node.js installed and you are not on macOS, the binary download is the simplest option.</p>
 </div>
 </div>
-<p>Once installed, set up the workshop folder and venv following the two shared sections above (<a href="#set-up-the-workshop-folder">Set Up the Workshop Folder</a> and <a href="#set-up-python-with-a-virtual-environment">Set Up Python with a Virtual Environment</a>). Then launch Codex from the <code>claude_workshop</code> folder:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> claude_workshop</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">codex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Codex will detect and use the <code>.venv/</code> automatically. The first time you run it, choose <strong>Sign in with ChatGPT</strong> and complete the browser login.</p>
+<p>Once installed, <a href="#create-a-workshop-folder">create your workshop folder</a> following the shared section above. Then launch Codex from inside it:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> claude_workshop</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">codex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first time you run it, choose <strong>Sign in with ChatGPT</strong> and complete the browser login. From there, ask Codex to set up Python, clone the LINCS skills repository, and download the workshop data, just as you would with Claude Code in the <a href="./first-session.html">first session</a>.</p>
 <p>If you prefer the browser interface instead, download the LINCS skills repository as a ZIP from <a href="https://github.com/jburnford/lincs_skills">github.com/jburnford/lincs_skills</a> (green <strong>Code</strong> button &gt; <strong>Download ZIP</strong>) and upload files to each task at <a href="https://chatgpt.com/codex">chatgpt.com/codex</a>.</p>
 </section>
 <section id="differences-to-be-aware-of" class="level3">
@@ -456,7 +408,7 @@ Codex still needs Node.js (if you go the npm route)
 <h3 class="anchored" data-anchor-id="checklist-1">Checklist</h3>
 <ul class="task-list">
 <li><label><input type="checkbox"><code>codex</code> launches in terminal, or you can access <a href="https://chatgpt.com/codex">chatgpt.com/codex</a></label></li>
-<li><label><input type="checkbox">You have completed both shared sections (workshop folder + venv)</label></li>
+<li><label><input type="checkbox">You have created an empty <code>claude_workshop</code> folder</label></li>
 </ul>
 
 

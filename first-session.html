@@ -194,9 +194,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#other-useful-commands" id="toc-other-useful-commands" class="nav-link" data-scroll-target="#other-useful-commands">Other useful commands</a></li>
   <li><a href="#if-you-get-lost" id="toc-if-you-get-lost" class="nav-link" data-scroll-target="#if-you-get-lost">If you get lost</a></li>
   </ul></li>
-  <li><a href="#launch-claude-code" id="toc-launch-claude-code" class="nav-link" data-scroll-target="#launch-claude-code">Launch Claude Code</a>
+  <li><a href="#launch-claude-code" id="toc-launch-claude-code" class="nav-link" data-scroll-target="#launch-claude-code">Launch Claude Code</a></li>
+  <li><a href="#let-claude-code-set-up-the-workshop" id="toc-let-claude-code-set-up-the-workshop" class="nav-link" data-scroll-target="#let-claude-code-set-up-the-workshop">Let Claude Code Set Up the Workshop</a>
   <ul class="collapse">
-  <li><a href="#have-claude-code-set-up-the-python-environment" id="toc-have-claude-code-set-up-the-python-environment" class="nav-link" data-scroll-target="#have-claude-code-set-up-the-python-environment">Have Claude Code set up the Python environment</a></li>
+  <li><a href="#check-python" id="toc-check-python" class="nav-link" data-scroll-target="#check-python">1. Check Python</a></li>
+  <li><a href="#clone-the-lincs-skills-repository" id="toc-clone-the-lincs-skills-repository" class="nav-link" data-scroll-target="#clone-the-lincs-skills-repository">2. Clone the LINCS skills repository</a></li>
+  <li><a href="#create-a-python-virtual-environment-and-install-workshop-packages" id="toc-create-a-python-virtual-environment-and-install-workshop-packages" class="nav-link" data-scroll-target="#create-a-python-virtual-environment-and-install-workshop-packages">3. Create a Python virtual environment and install workshop packages</a></li>
+  <li><a href="#download-the-workshop-data" id="toc-download-the-workshop-data" class="nav-link" data-scroll-target="#download-the-workshop-data">4. Download the workshop data</a></li>
   </ul></li>
   <li><a href="#try-some-basic-commands" id="toc-try-some-basic-commands" class="nav-link" data-scroll-target="#try-some-basic-commands">Try Some Basic Commands</a>
   <ul class="collapse">
@@ -321,7 +325,7 @@ Windows note
 <p>PowerShell supports <code>ls</code> and <code>pwd</code> as aliases, so most commands in this workshop will work as written. If something does not work, try <code>dir</code> instead of <code>ls</code>. If you installed Git for Windows, you also have <strong>Git Bash</strong>, which behaves like a Mac/Linux terminal and may be easier to follow along with.</p>
 </div>
 </div>
-<p>Try typing <code>ls</code> after you <code>cd</code> into the <code>claude_workshop</code> folder. You should see the <code>lincs_skills/</code> subfolder you cloned during installation. (The <code>.venv/</code> folder will appear after Claude Code creates it later in this session.)</p>
+<p>Try typing <code>ls</code> after you <code>cd</code> into the <code>claude_workshop</code> folder. It should be empty for now — Claude Code will fill it in once you launch it in the next section.</p>
 </section>
 <section id="if-you-get-lost" class="level3">
 <h3 class="anchored" data-anchor-id="if-you-get-lost">If you get lost</h3>
@@ -330,17 +334,31 @@ Windows note
 </section>
 <section id="launch-claude-code" class="level2">
 <h2 class="anchored" data-anchor-id="launch-claude-code">Launch Claude Code</h2>
-<p>From inside <code>claude_workshop</code>, launch Claude Code:</p>
+<p>From inside <code>claude_workshop</code>, launch Claude Code in your terminal:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You should see the <code>&gt;</code> prompt — this is Claude Code’s prompt, not your terminal’s. From here, you type natural language, not terminal commands.</p>
-<p>Claude Code reads any <code>CLAUDE.md</code> file in the current directory at startup, so as soon as you launch it from <code>claude_workshop</code> it has context about the LINCS project (via the <code>lincs_skills/</code> subfolder).</p>
-<section id="have-claude-code-set-up-the-python-environment" class="level3">
-<h3 class="anchored" data-anchor-id="have-claude-code-set-up-the-python-environment">Have Claude Code set up the Python environment</h3>
-<p>Before any of the exercises, ask Claude Code to create a Python virtual environment in this folder and install the packages we will need:</p>
+<p>You should see the <code>&gt;</code> prompt — this is Claude Code’s prompt, not your terminal’s. <strong>From here on, almost everything you type goes into Claude Code, not your terminal.</strong> Whenever a code block on this page starts with <code>&gt;</code>, that’s a prompt for Claude.</p>
+</section>
+<section id="let-claude-code-set-up-the-workshop" class="level2">
+<h2 class="anchored" data-anchor-id="let-claude-code-set-up-the-workshop">Let Claude Code Set Up the Workshop</h2>
+<p>Your <code>claude_workshop</code> folder is empty right now. Let’s have Claude check what’s on your machine and set up everything we need for the workshop.</p>
+<section id="check-python" class="level3">
+<h3 class="anchored" data-anchor-id="check-python">1. Check Python</h3>
+<pre><code>&gt; What version of Python is installed on this machine, and is the venv
+&gt; module available? If anything is missing, tell me how to fix it.</code></pre>
+<p>Claude Code will run <code>python3 --version</code> and <code>python3 -m venv --help</code>, report what it found, and tell you what to do if Python isn’t there or is too old. (On most machines you will already have what you need.)</p>
+</section>
+<section id="clone-the-lincs-skills-repository" class="level3">
+<h3 class="anchored" data-anchor-id="clone-the-lincs-skills-repository">2. Clone the LINCS skills repository</h3>
+<pre><code>&gt; Clone https://github.com/jburnford/lincs_skills.git into this folder
+&gt; as a subfolder called lincs_skills/.</code></pre>
+<p>This pulls in the seven LINCS-specific skills (CIDOC-CRM, the LINCS application profile, place/person disambiguation, etc.) that we will use later in the workshop.</p>
+</section>
+<section id="create-a-python-virtual-environment-and-install-workshop-packages" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-python-virtual-environment-and-install-workshop-packages">3. Create a Python virtual environment and install workshop packages</h3>
 <pre><code>&gt; Create a Python virtual environment at .venv/ in this folder, then
 &gt; install pandas, openpyxl, matplotlib, geopandas, rdflib, and requests
 &gt; into it. Use that venv for any Python you run for the rest of the session.</code></pre>
-<p>Claude Code will run <code>python3 -m venv .venv</code>, ask permission, install the packages with pip, and then keep using that venv for everything that follows. The install takes a couple of minutes (about 100–200 MB of downloads). If Claude Code seems to forget about the venv later, just remind it the same way.</p>
+<p>Claude Code will run <code>python3 -m venv .venv</code>, ask permission, install the packages with pip into the new venv, and then keep using that venv for everything that follows. The install takes a couple of minutes (about 100–200 MB of downloads). If Claude Code seems to forget about the venv later, just remind it the same way.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -351,16 +369,34 @@ If pip install fails
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>On a locked-down machine the <code>pip install</code> step may fail with a permissions error. If that happens, tell Claude Code: <em>“Make sure you are installing into the .venv, not system Python.”</em> Once it activates the venv first, the install should succeed.</p>
+<p>On a locked-down machine, <code>pip install</code> may fail with a permissions error if Claude tries to install into system Python. If that happens, tell it: <em>“Make sure you are installing into the .venv, not system Python.”</em> Once it activates the venv first, the install should succeed.</p>
 </div>
 </div>
+</section>
+<section id="download-the-workshop-data" class="level3">
+<h3 class="anchored" data-anchor-id="download-the-workshop-data">4. Download the workshop data</h3>
+<pre><code>&gt; Download workshop-data.zip from
+&gt; https://github.com/jburnford/claude_code_workshop/releases/download/workshop-data-2026-04/workshop-data.zip
+&gt; and unzip it into a data/ subfolder so the files end up at
+&gt; data/canada_boundaries_temporal.gpkg, data/boundaries_poly.csv,
+&gt; and data/boundary_changes.csv.</code></pre>
+<p>When it’s done, your folder should look like this:</p>
+<pre><code>claude_workshop/
+├── .venv/
+├── lincs_skills/
+└── data/
+    ├── canada_boundaries_temporal.gpkg
+    ├── boundaries_poly.csv
+    └── boundary_changes.csv</code></pre>
+<p>You only ever do this setup once. From now on, any time you reopen the workshop, you just <code>cd claude_workshop &amp;&amp; claude</code> and pick up where you left off.</p>
 </section>
 </section>
 <section id="try-some-basic-commands" class="level2">
 <h2 class="anchored" data-anchor-id="try-some-basic-commands">Try Some Basic Commands</h2>
+<p>Now that the workshop folder is set up, try a few simple things to get a feel for how Claude Code works.</p>
 <section id="ask-it-to-read-a-file" class="level3">
 <h3 class="anchored" data-anchor-id="ask-it-to-read-a-file">Ask it to read a file</h3>
-<pre><code>&gt; Read the skills/README.md and summarize what's in this repository</code></pre>
+<pre><code>&gt; Read lincs_skills/README.md and summarize what's in this repository.</code></pre>
 <p>Claude Code reads the file directly from disk — no copying, no pasting. It reports back and waits for your next instruction.</p>
 </section>
 <section id="ask-it-a-question" class="level3">
