@@ -28,13 +28,13 @@ The [lincs_skills](https://github.com/jburnford/lincs_skills) repository contain
 If you launched Claude Code from inside `claude_workshop` (as we did in Part 1), it can see the skills in the `lincs_skills/` subfolder. Try:
 
 ```
-> /cidoc-crm
+/cidoc-crm
 ```
 
 Claude Code loads the full CIDOC-CRM reference. Now ask it something:
 
 ```
-> What is the correct way to model a place that changed names over time?
+What is the correct way to model a place that changed names over time?
 ```
 
 Compare the answer to what you got earlier without the skill loaded --- it should be noticeably more precise, with specific class and property references.
@@ -42,13 +42,13 @@ Compare the answer to what you got earlier without the skill loaded --- it shoul
 ### Loading the LINCS Profile
 
 ```
-> /lincs-profile
+/lincs-profile
 ```
 
 This loads the LINCS application profile, which defines how LINCS projects model entities. Now Claude Code knows not just CIDOC-CRM in the abstract, but the specific patterns LINCS uses.
 
 ```
-> How does LINCS model a geographic place with a temporal extent?
+How does LINCS model a geographic place with a temporal extent?
 ```
 
 ## Using Skills with Codex
@@ -67,25 +67,25 @@ Pick one of these and spend a few minutes exploring:
 
 ### Option A: CIDOC-CRM deep dive
 ```
-> /cidoc-crm
-> Explain the difference between E53_Place and E4_Period.
-> When would I use one versus the other for modeling a territory
-> that existed for a specific time period?
+/cidoc-crm
+Explain the difference between E53_Place and E4_Period.
+When would I use one versus the other for modeling a territory
+that existed for a specific time period?
 ```
 
 ### Option B: LINCS modeling patterns
 ```
-> /lincs-profile
-> Show me a complete example of how LINCS models a historical
-> person with a name, birth date, and occupation.
-> Use proper Turtle syntax.
+/lincs-profile
+Show me a complete example of how LINCS models a historical
+person with a name, birth date, and occupation.
+Use proper Turtle syntax.
 ```
 
 ### Option C: Validation
 ```
-> /lincs-validate
-> What are the most common mistakes people make when creating
-> LINCS-compatible data? Give me the checklist.
+/lincs-validate
+What are the most common mistakes people make when creating
+LINCS-compatible data? Give me the checklist.
 ```
 
 Once you are comfortable with how skills work, we will apply them to our Canada boundaries data in the **[HGIS-to-LINCS Exercise](hands-on.qmd)**.

@@ -24,10 +24,13 @@ For longer-term use beyond this workshop, the best terminal experience on Window
 :::
 
 ::: {.callout-tip}
-## Reading the code blocks in this guide
-Every code block on **this installation page** is something you type into your **system terminal** (Terminal on macOS, PowerShell on Windows, your shell on Linux). Claude Code is not running yet, so everything has to be done by hand.
+## Reading the code blocks in this workshop
+There are two kinds of code blocks across this site:
 
-Once you finish this page, you will only run a handful of terminal commands ever again. Almost everything from the [first session](first-session.qmd) onward happens **inside Claude Code** --- you type prompts (lines that start with `>`) and Claude does the work, including cloning repositories, creating virtual environments, and installing packages.
+- **Terminal commands** are tagged `bash` (or `powershell`) and meant to be typed into your system terminal. You will see these on this installation page.
+- **Claude Code prompts** are plain code blocks (no language tag). Once Claude Code is running you can copy-paste them straight into the `>` prompt --- there is no `>` to type or strip out, just the words you would say to Claude.
+
+Claude Code is not running yet, so everything on this installation page is a terminal command. Once you finish this page, you will only run a handful of terminal commands ever again. Almost everything from the [first session](first-session.qmd) onward happens **inside Claude Code**.
 :::
 
 ---

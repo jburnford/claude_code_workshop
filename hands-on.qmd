@@ -19,8 +19,8 @@ claude
 Load the two skills we need:
 
 ```
-> /cidoc-crm
-> /lincs-profile
+/cidoc-crm
+/lincs-profile
 ```
 
 ## Step 2: Describe the Data
@@ -28,9 +28,9 @@ Load the two skills we need:
 Copy `boundaries_poly.csv` and `boundary_changes.csv` into your working directory (or point Claude Code to where they are), then:
 
 ```
-> Read boundaries_poly.csv and boundary_changes.csv.
-> I want to convert this data to LINCS-compatible CIDOC-CRM.
-> First, describe what entities and relationships you see in the data.
+Read boundaries_poly.csv and boundary_changes.csv.
+I want to convert this data to LINCS-compatible CIDOC-CRM.
+First, describe what entities and relationships you see in the data.
 ```
 
 Claude Code should identify entities like:
@@ -46,10 +46,10 @@ Claude Code should identify entities like:
 Start small. Pick one territory --- say, Rupert's Land --- and ask Claude Code to model it:
 
 ```
-> Model "Rupert's Land" as LINCS-compatible CIDOC-CRM in Turtle syntax.
-> It was controlled by the Hudson's Bay Company from 1670 to 1870.
-> Include the place, its name, temporal extent, and the controlling entity.
-> Use proper LINCS patterns.
+Model "Rupert's Land" as LINCS-compatible CIDOC-CRM in Turtle syntax.
+It was controlled by the Hudson's Bay Company from 1670 to 1870.
+Include the place, its name, temporal extent, and the controlling entity.
+Use proper LINCS patterns.
 ```
 
 Review the output. Check:
@@ -62,14 +62,14 @@ Review the output. Check:
 ## Step 4: Validate
 
 ```
-> /lincs-validate
-> Validate the Turtle you just produced against LINCS requirements.
+/lincs-validate
+Validate the Turtle you just produced against LINCS requirements.
 ```
 
 The validation skill checks against nine categories and reports PASS, WARN, or FAIL for each. Fix any issues:
 
 ```
-> Fix the warnings and regenerate the Turtle.
+Fix the warnings and regenerate the Turtle.
 ```
 
 ## Step 5: Scale Up
@@ -77,17 +77,17 @@ The validation skill checks against nine categories and reports PASS, WARN, or F
 Now ask Claude Code to handle more of the dataset:
 
 ```
-> Convert all boundary changes from the Treaty of Paris (1763) into
-> LINCS-compatible Turtle. Include the treaty as an event, the
-> territories that changed sovereignty, and the sovereign entities.
+Convert all boundary changes from the Treaty of Paris (1763) into
+LINCS-compatible Turtle. Include the treaty as an event, the
+territories that changed sovereignty, and the sovereign entities.
 ```
 
 Or try a broader conversion:
 
 ```
-> Write a Python script that reads boundaries_poly.csv and generates
-> LINCS-compatible Turtle for all territories. Use the patterns we
-> established for Rupert's Land. Save the output as canada_boundaries.ttl.
+Write a Python script that reads boundaries_poly.csv and generates
+LINCS-compatible Turtle for all territories. Use the patterns we
+established for Rupert's Land. Save the output as canada_boundaries.ttl.
 ```
 
 ## Step 6: Disambiguate Places (If Time Allows)
@@ -95,8 +95,8 @@ Or try a broader conversion:
 If you want to ground your places to Wikidata:
 
 ```
-> /place-disambig
-> Disambiguate "Rupert's Land" to a Wikidata QID.
+/place-disambig
+Disambiguate "Rupert's Land" to a Wikidata QID.
 ```
 
 This uses the Wikidata MCP server (if configured) or Claude Code's knowledge to find the correct Wikidata entity. The QID can then be added to your Turtle as an `owl:sameAs` or `skos:exactMatch` link.

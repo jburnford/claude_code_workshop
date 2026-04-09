@@ -38,15 +38,15 @@ In your `claude_workshop` folder, create a `data/` subfolder and unzip the archi
 Start a Claude Code session in the workshop directory and try:
 
 ```
-> Read data/boundaries_poly.csv and give me an overview.
-> How many distinct territorial entities exist? How many time periods?
+Read data/boundaries_poly.csv and give me an overview.
+How many distinct territorial entities exist? How many time periods?
 ```
 
 Then dig deeper:
 
 ```
-> Create a timeline showing how many territorial entities existed in each year.
-> Which sovereign power controlled the most territory names over time?
+Create a timeline showing how many territorial entities existed in each year.
+Which sovereign power controlled the most territory names over time?
 ```
 
 ::: {.callout-note}
@@ -54,55 +54,54 @@ Then dig deeper:
 If you want Claude Code to work directly with the GeoPackage (which includes geometry), ask it to use Python with `geopandas` or `sqlite3`. The CSV files have the same attribute data but no spatial geometry.
 :::
 
-## Exercise 2: Historical Analysis
+## Exercise 2: Querying the Boundary Changes
 
-The `boundary_changes` table contains rich historical descriptions. Try:
-
-```
-> Read data/boundary_changes.csv. Group the events by century and
-> summarize the major themes of each period.
-```
+The `boundary_changes` table contains short descriptions of each historical event. Try asking Claude Code for specific summaries and counts:
 
 ```
-> Which treaties had the largest impact on Canadian territorial boundaries?
-> Rank them by how many boundary changes they caused.
+Read data/boundary_changes.csv. Count the events per century and list them in a table.
 ```
 
 ```
-> Find all boundary changes related to Indigenous territories.
-> What patterns do you see?
+List the treaties named in the description column, ranked by how many boundary changes each one is associated with.
 ```
+
+```
+Filter the rows where the description mentions Indigenous territories, treaties with First Nations, or named Indigenous groups, and list them as a table with year, description, and territories affected.
+```
+
+The historical interpretation of these results --- *why* one treaty mattered more than another, what the patterns mean --- is your job. Claude Code is good at retrieving and counting; it is not a substitute for the contextual knowledge you bring as a historian.
 
 ## Exercise 3: Write a Script
 
 This is where Claude Code shines --- ask it to write code for you:
 
 ```
-> Write a Python script that reads boundaries_poly.csv and produces
-> a summary table showing, for each sovereign entity, the years they
-> first and last appear, and how many territorial polygons they controlled.
+Write a Python script that reads boundaries_poly.csv and produces
+a summary table showing, for each sovereign entity, the years they
+first and last appear, and how many territorial polygons they controlled.
 ```
 
 Claude Code will write the script, ask permission to save it, and then offer to run it. Review the output and iterate:
 
 ```
-> Good, but add a column showing the total number of years each
-> sovereign was present. Sort by that column descending.
+Good, but add a column showing the total number of years each
+sovereign was present. Sort by that column descending.
 ```
 
 ## Exercise 4: Visualization
 
 ```
-> Using matplotlib, create a stacked area chart showing the number of
-> territorial entities controlled by each sovereign power over time.
-> Save it as sovereignty_timeline.png.
+Using matplotlib, create a stacked area chart showing the number of
+territorial entities controlled by each sovereign power over time.
+Save it as sovereignty_timeline.png.
 ```
 
 Or, if you prefer a simpler output:
 
 ```
-> Create a text-based timeline showing major boundary events from
-> 1667 to 1999. Format it as a markdown table I could put in a paper.
+Create a text-based timeline showing major boundary events from
+1667 to 1999. Format it as a markdown table I could put in a paper.
 ```
 
 ## Exercise 5: Spatial Queries (Advanced)
@@ -110,15 +109,15 @@ Or, if you prefer a simpler output:
 This exercise uses the full `canada_boundaries_temporal.gpkg` file (74 MB), included in the `workshop-data.zip` download above. You will also need `geopandas` installed (`pip install geopandas`).
 
 ```
-> Using geopandas, read the boundaries_poly layer from
-> data/canada_boundaries_temporal.gpkg. Calculate the approximate
-> area of each territory in 1867 (Confederation year).
-> Which was largest?
+Using geopandas, read the boundaries_poly layer from
+data/canada_boundaries_temporal.gpkg. Calculate the approximate
+area of each territory in 1867 (Confederation year).
+Which was largest?
 ```
 
 ```
-> Create a simple map showing Canadian territorial boundaries in 1867.
-> Use different colors for each sovereign. Save as confederation_1867.png.
+Create a simple map showing Canadian territorial boundaries in 1867.
+Use different colors for each sovereign. Save as confederation_1867.png.
 ```
 
 ::: {.callout-tip}

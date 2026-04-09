@@ -75,9 +75,9 @@ As a rough guide, data that you created yourself --- your own notes, your own wr
 You can often describe your data to Claude Code without giving it the actual records:
 
 ```
-> I have a dataset with columns: name, community, date_of_birth,
-> traditional_territory. I need to model this in CIDOC-CRM.
-> What classes and properties should I use?
+I have a dataset with columns: name, community, date_of_birth,
+traditional_territory. I need to model this in CIDOC-CRM.
+What classes and properties should I use?
 ```
 
 Claude Code can help you design a data model, write transformation scripts, and debug code without ever seeing the sensitive data itself.
