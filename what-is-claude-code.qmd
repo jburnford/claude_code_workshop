@@ -54,6 +54,8 @@ Every project can have a `CLAUDE.md` file in its root directory. This is a set o
 
 This is important for domain-specific work. If you need Claude Code to follow particular conventions (how to format URIs, which ontology version to use, what anti-patterns to avoid), put those instructions in `CLAUDE.md` rather than hoping it remembers them from a previous conversation. Claude Code also has an automatic memory feature that tries to retain important details between sessions, but a `CLAUDE.md` file gives you explicit control.
 
+For academic work, one rule worth putting in every `CLAUDE.md` is **"always save Python (or R, or shell) scripts to a file before running them, never inline."** Without this, Claude Code will sometimes execute analyses through `python -c "..."` or piped heredocs to keep the project tidy --- which leaves no trace of how a result was produced. In research that needs to be reproducible, citable, and reviewable, that trace is not optional. The first session walks you through writing exactly this kind of `CLAUDE.md`.
+
 ### Skills (Slash Commands)
 
 Skills are curated markdown files that give Claude Code deep knowledge of a specific domain. When you load a skill with a slash command like `/cidoc-crm` or `/lincs-profile`, Claude Code gains detailed reference material --- ontology classes, properties, modeling patterns, validation rules --- and uses it to inform its responses.

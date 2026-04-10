@@ -134,6 +134,35 @@ data/canada_boundaries_temporal.gpkg, data/boundaries_poly.csv,
 and data/boundary_changes.csv.
 ```
 
+### 5. Write the workshop ground rules into `CLAUDE.md`
+
+Claude Code reads any file called `CLAUDE.md` in the project directory at the start of every session, so it is the right place to put project-wide instructions you do not want to repeat each time. Ask Claude Code to create one for you:
+
+```
+Create a CLAUDE.md in this folder with the following workshop ground rules,
+and follow them yourself for the rest of this session:
+
+1. Always save Python code to a .py file inside this folder before running it.
+   Do not run Python with `python -c "..."`, do not pipe scripts via stdin,
+   and do not use bash heredocs to execute Python. Every script must exist
+   on disk so it can be re-run, version-controlled, and inspected later.
+2. Always run Python through the .venv in this folder. If the venv is not
+   active, activate it before running anything.
+3. When you are about to install a Python package, install it into .venv
+   using pip --- never into system Python.
+4. Do not insert Wikidata QIDs or other authority URIs into RDF/Turtle
+   output unless you have looked them up against a live source. If you
+   are not sure, mint a LINCS URI instead.
+5. When the user asks for an analysis, prefer producing a script + its
+   output over a one-off shell command. Reproducibility matters for
+   academic work.
+```
+
+::: {.callout-important}
+## Why this matters
+By default, Claude Code will sometimes run Python code inline using `python -c "..."` or by piping a script through stdin. This keeps the project folder tidy, but it leaves no trace of *how* a result was produced --- which is fatal for academic work where you need to be able to re-run, share, and cite the exact analysis. The `CLAUDE.md` rule above forces every script onto disk so you (and your future self, and your reviewers) can see what was actually done.
+:::
+
 When it's done, your folder should look like this:
 
 ```
@@ -142,13 +171,14 @@ claude_workshop/
 │   └── skills/             ← /cidoc-crm, /lincs-profile, etc. live here
 ├── .venv/
 ├── lincs_skills/           ← cloned repo, source of the skills
-└── data/
-    ├── canada_boundaries_temporal.gpkg
-    ├── boundaries_poly.csv
-    └── boundary_changes.csv
+├── data/
+│   ├── canada_boundaries_temporal.gpkg
+│   ├── boundaries_poly.csv
+│   └── boundary_changes.csv
+└── CLAUDE.md               ← workshop ground rules, auto-loaded each session
 ```
 
-You only ever do this setup once. From now on, any time you reopen the workshop, you just `cd claude_workshop && claude` and pick up where you left off.
+You only ever do this setup once. From now on, any time you reopen the workshop, you just `cd claude_workshop && claude` and pick up where you left off --- the ground rules in `CLAUDE.md` are reapplied automatically.
 
 ## Try Some Basic Commands
 

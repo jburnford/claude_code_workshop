@@ -49,7 +49,8 @@ Start small. Pick one territory --- say, Rupert's Land --- and ask Claude Code t
 Model "Rupert's Land" as LINCS-compatible CIDOC-CRM in Turtle syntax.
 It was controlled by the Hudson's Bay Company from 1670 to 1870.
 Include the place, its name, temporal extent, and the controlling entity.
-Use proper LINCS patterns.
+Do NOT add any Wikidata QIDs or other authority URIs --- leave entity
+grounding for a later step. Use proper LINCS patterns.
 ```
 
 Review the output. Check:
@@ -58,19 +59,39 @@ Review the output. Check:
 - Are the properties connecting them appropriate?
 - Does the temporal modeling follow LINCS patterns?
 - Are URIs properly formed?
+- **Are there any Wikidata QIDs (`wd:Q…`) in the output that you did not ask for?** If so, delete them or ask Claude Code to regenerate without them.
+
+::: {.callout-warning}
+## Watch for hallucinated Wikidata QIDs
+Even when you do not ask for them, Claude will often drop Wikidata QIDs into the Turtle output. There are two reasons for this:
+
+1. **The LINCS skills tell it to.** The CIDOC-CRM and LINCS profile skills both say things like "use authority URIs from Wikidata, GeoNames, etc., where possible, and mint a LINCS URI only if no external authority exists." That instruction is correct in principle, but it implicitly assumes the model has a way to *verify* the authority --- which without the [Wikidata MCP server](https://wd-mcp.wmcloud.org/) configured, it does not.
+2. **The model defaults to the easy, plausible-looking answer.** When asked for an authority URI it cannot verify, Claude (and every other current LLM) will happily generate a Q-number from memory. The Q-numbers *look* authoritative but the success rate is very low --- they frequently point to a different entity, a disambiguation page, or nothing at all.
+
+This is one of the most important lessons of working with LLMs on knowledge-graph data: **a plausible-looking URI is not a verified URI.** Until the Wikidata MCP is wired in, treat any unrequested authority URI as a hallucination and remove it. You may also need to remind Claude of this **repeatedly** during Steps 4 and 5 --- the skills' "use authorities where possible" instruction tends to pull it back toward inserting QIDs even after you have told it to stop.
+
+We will come back to grounded entity disambiguation in [Step 6](#step-6-disambiguate-places-demo-only) using the `/place-disambig` skill, which is structured around the MCP lookup rather than letting the model guess.
+:::
 
 ## Step 4: Validate
 
 ```
 /lincs-validate
 Validate the Turtle you just produced against LINCS requirements.
+Do not add any new authority URIs while fixing issues.
 ```
 
 The validation skill checks against nine categories and reports PASS, WARN, or FAIL for each. Fix any issues:
 
 ```
-Fix the warnings and regenerate the Turtle.
+Fix the warnings and regenerate the Turtle. Continue to leave Wikidata
+QIDs and other authority URIs out --- mint LINCS URIs only.
 ```
+
+::: {.callout-note}
+## Inspect the regenerated Turtle
+After Claude regenerates, scan the file again for `wd:Q…` or other authority URIs you did not put there. The skills' built-in "use authorities where possible" guidance often pulls them back in even after you have asked Claude not to. If you see new ones, delete them and tell Claude again.
+:::
 
 ## Step 5: Scale Up
 
@@ -80,6 +101,8 @@ Now ask Claude Code to handle more of the dataset:
 Convert all boundary changes from the Treaty of Paris (1763) into
 LINCS-compatible Turtle. Include the treaty as an event, the
 territories that changed sovereignty, and the sovereign entities.
+Mint LINCS URIs for all entities --- do not insert any Wikidata QIDs
+or other authority URIs.
 ```
 
 Or try a broader conversion:
@@ -87,19 +110,31 @@ Or try a broader conversion:
 ```
 Write a Python script that reads boundaries_poly.csv and generates
 LINCS-compatible Turtle for all territories. Use the patterns we
-established for Rupert's Land. Save the output as canada_boundaries.ttl.
+established for Rupert's Land, including LINCS-only URIs (no
+hallucinated Wikidata QIDs). Save the output as canada_boundaries.ttl.
 ```
 
-## Step 6: Disambiguate Places (If Time Allows)
+## Step 6: Disambiguate Places (Demo Only)
 
-If you want to ground your places to Wikidata:
+Eventually you will want to ground each place in your data to a real Wikidata entity so other LINCS datasets can link to yours. The `/place-disambig` skill is designed for this:
 
 ```
 /place-disambig
 Disambiguate "Rupert's Land" to a Wikidata QID.
 ```
 
-This uses the Wikidata MCP server (if configured) or Claude Code's knowledge to find the correct Wikidata entity. The QID can then be added to your Turtle as an `owl:sameAs` or `skos:exactMatch` link.
+::: {.callout-warning}
+## Why this is a demo and not a real workshop step
+The skill is built around the [Wikidata MCP server](https://wd-mcp.wmcloud.org/), which lets Claude Code do a vector search against the live Wikidata index. **The MCP server is not configured in your fresh workshop setup**, so when you run the skill today Claude will fall back to guessing QIDs from memory --- and as we just saw in Step 3, it is wrong far more often than it is right.
+
+We are showing you the skill so you know it exists and so you can set up the MCP after the workshop. For real entity grounding work, the workflow is:
+
+1. Configure the Wikidata MCP server in `.claude/mcp.json` (5--10 minutes, see the [WikidataMCP project](https://wd-mcp.wmcloud.org/))
+2. Re-run `/place-disambig` --- it will now do live vector lookups
+3. Verify each match by hand before adding it to your Turtle as `owl:sameAs` or `skos:exactMatch`
+
+Even with the MCP, manual review is essential. Wikidata grounding is not a step to automate blindly.
+:::
 
 ## What You Have Built
 
