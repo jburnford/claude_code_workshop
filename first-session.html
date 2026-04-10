@@ -201,6 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#clone-the-lincs-skills-repository-and-install-the-skills" id="toc-clone-the-lincs-skills-repository-and-install-the-skills" class="nav-link" data-scroll-target="#clone-the-lincs-skills-repository-and-install-the-skills">2. Clone the LINCS skills repository and install the skills</a></li>
   <li><a href="#create-a-python-virtual-environment-and-install-workshop-packages" id="toc-create-a-python-virtual-environment-and-install-workshop-packages" class="nav-link" data-scroll-target="#create-a-python-virtual-environment-and-install-workshop-packages">3. Create a Python virtual environment and install workshop packages</a></li>
   <li><a href="#download-the-workshop-data" id="toc-download-the-workshop-data" class="nav-link" data-scroll-target="#download-the-workshop-data">4. Download the workshop data</a></li>
+  <li><a href="#write-the-workshop-ground-rules-into-claude.md" id="toc-write-the-workshop-ground-rules-into-claude.md" class="nav-link" data-scroll-target="#write-the-workshop-ground-rules-into-claude.md">5. Write the workshop ground rules into <code>CLAUDE.md</code></a></li>
   </ul></li>
   <li><a href="#try-some-basic-commands" id="toc-try-some-basic-commands" class="nav-link" data-scroll-target="#try-some-basic-commands">Try Some Basic Commands</a>
   <ul class="collapse">
@@ -397,17 +398,52 @@ https://github.com/jburnford/claude_code_workshop/releases/download/workshop-dat
 and unzip it into a data/ subfolder so the files end up at
 data/canada_boundaries_temporal.gpkg, data/boundaries_poly.csv,
 and data/boundary_changes.csv.</code></pre>
+</section>
+<section id="write-the-workshop-ground-rules-into-claude.md" class="level3">
+<h3 class="anchored" data-anchor-id="write-the-workshop-ground-rules-into-claude.md">5. Write the workshop ground rules into <code>CLAUDE.md</code></h3>
+<p>Claude Code reads any file called <code>CLAUDE.md</code> in the project directory at the start of every session, so it is the right place to put project-wide instructions you do not want to repeat each time. Ask Claude Code to create one for you:</p>
+<pre><code>Create a CLAUDE.md in this folder with the following workshop ground rules,
+and follow them yourself for the rest of this session:
+
+1. Always save Python code to a .py file inside this folder before running it.
+   Do not run Python with `python -c "..."`, do not pipe scripts via stdin,
+   and do not use bash heredocs to execute Python. Every script must exist
+   on disk so it can be re-run, version-controlled, and inspected later.
+2. Always run Python through the .venv in this folder. If the venv is not
+   active, activate it before running anything.
+3. When you are about to install a Python package, install it into .venv
+   using pip --- never into system Python.
+4. Do not insert Wikidata QIDs or other authority URIs into RDF/Turtle
+   output unless you have looked them up against a live source. If you
+   are not sure, mint a LINCS URI instead.
+5. When the user asks for an analysis, prefer producing a script + its
+   output over a one-off shell command. Reproducibility matters for
+   academic work.</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why this matters
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By default, Claude Code will sometimes run Python code inline using <code>python -c "..."</code> or by piping a script through stdin. This keeps the project folder tidy, but it leaves no trace of <em>how</em> a result was produced — which is fatal for academic work where you need to be able to re-run, share, and cite the exact analysis. The <code>CLAUDE.md</code> rule above forces every script onto disk so you (and your future self, and your reviewers) can see what was actually done.</p>
+</div>
+</div>
 <p>When it’s done, your folder should look like this:</p>
 <pre><code>claude_workshop/
 ├── .claude/
 │   └── skills/             ← /cidoc-crm, /lincs-profile, etc. live here
 ├── .venv/
 ├── lincs_skills/           ← cloned repo, source of the skills
-└── data/
-    ├── canada_boundaries_temporal.gpkg
-    ├── boundaries_poly.csv
-    └── boundary_changes.csv</code></pre>
-<p>You only ever do this setup once. From now on, any time you reopen the workshop, you just <code>cd claude_workshop &amp;&amp; claude</code> and pick up where you left off.</p>
+├── data/
+│   ├── canada_boundaries_temporal.gpkg
+│   ├── boundaries_poly.csv
+│   └── boundary_changes.csv
+└── CLAUDE.md               ← workshop ground rules, auto-loaded each session</code></pre>
+<p>You only ever do this setup once. From now on, any time you reopen the workshop, you just <code>cd claude_workshop &amp;&amp; claude</code> and pick up where you left off — the ground rules in <code>CLAUDE.md</code> are reapplied automatically.</p>
 </section>
 </section>
 <section id="try-some-basic-commands" class="level2">

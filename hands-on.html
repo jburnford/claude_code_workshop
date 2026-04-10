@@ -193,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-3-model-a-single-entity" id="toc-step-3-model-a-single-entity" class="nav-link" data-scroll-target="#step-3-model-a-single-entity">Step 3: Model a Single Entity</a></li>
   <li><a href="#step-4-validate" id="toc-step-4-validate" class="nav-link" data-scroll-target="#step-4-validate">Step 4: Validate</a></li>
   <li><a href="#step-5-scale-up" id="toc-step-5-scale-up" class="nav-link" data-scroll-target="#step-5-scale-up">Step 5: Scale Up</a></li>
-  <li><a href="#step-6-disambiguate-places-if-time-allows" id="toc-step-6-disambiguate-places-if-time-allows" class="nav-link" data-scroll-target="#step-6-disambiguate-places-if-time-allows">Step 6: Disambiguate Places (If Time Allows)</a></li>
+  <li><a href="#step-6-disambiguate-places-demo-only" id="toc-step-6-disambiguate-places-demo-only" class="nav-link" data-scroll-target="#step-6-disambiguate-places-demo-only">Step 6: Disambiguate Places (Demo Only)</a></li>
   <li><a href="#what-you-have-built" id="toc-what-you-have-built" class="nav-link" data-scroll-target="#what-you-have-built">What You Have Built</a></li>
   <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
   </ul>
@@ -256,39 +256,97 @@ First, describe what entities and relationships you see in the data.</code></pre
 <pre><code>Model "Rupert's Land" as LINCS-compatible CIDOC-CRM in Turtle syntax.
 It was controlled by the Hudson's Bay Company from 1670 to 1870.
 Include the place, its name, temporal extent, and the controlling entity.
-Use proper LINCS patterns.</code></pre>
+Do NOT add any Wikidata QIDs or other authority URIs --- leave entity
+grounding for a later step. Use proper LINCS patterns.</code></pre>
 <p>Review the output. Check:</p>
 <ul>
 <li>Are the CIDOC-CRM classes correct?</li>
 <li>Are the properties connecting them appropriate?</li>
 <li>Does the temporal modeling follow LINCS patterns?</li>
 <li>Are URIs properly formed?</li>
+<li><strong>Are there any Wikidata QIDs (<code>wd:Q…</code>) in the output that you did not ask for?</strong> If so, delete them or ask Claude Code to regenerate without them.</li>
 </ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Watch for hallucinated Wikidata QIDs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Even when you do not ask for them, Claude will often drop Wikidata QIDs into the Turtle output. There are two reasons for this:</p>
+<ol type="1">
+<li><strong>The LINCS skills tell it to.</strong> The CIDOC-CRM and LINCS profile skills both say things like “use authority URIs from Wikidata, GeoNames, etc., where possible, and mint a LINCS URI only if no external authority exists.” That instruction is correct in principle, but it implicitly assumes the model has a way to <em>verify</em> the authority — which without the <a href="https://wd-mcp.wmcloud.org/">Wikidata MCP server</a> configured, it does not.</li>
+<li><strong>The model defaults to the easy, plausible-looking answer.</strong> When asked for an authority URI it cannot verify, Claude (and every other current LLM) will happily generate a Q-number from memory. The Q-numbers <em>look</em> authoritative but the success rate is very low — they frequently point to a different entity, a disambiguation page, or nothing at all.</li>
+</ol>
+<p>This is one of the most important lessons of working with LLMs on knowledge-graph data: <strong>a plausible-looking URI is not a verified URI.</strong> Until the Wikidata MCP is wired in, treat any unrequested authority URI as a hallucination and remove it. You may also need to remind Claude of this <strong>repeatedly</strong> during Steps 4 and 5 — the skills’ “use authorities where possible” instruction tends to pull it back toward inserting QIDs even after you have told it to stop.</p>
+<p>We will come back to grounded entity disambiguation in <a href="#step-6-disambiguate-places-demo-only">Step 6</a> using the <code>/place-disambig</code> skill, which is structured around the MCP lookup rather than letting the model guess.</p>
+</div>
+</div>
 </section>
 <section id="step-4-validate" class="level2">
 <h2 class="anchored" data-anchor-id="step-4-validate">Step 4: Validate</h2>
 <pre><code>/lincs-validate
-Validate the Turtle you just produced against LINCS requirements.</code></pre>
+Validate the Turtle you just produced against LINCS requirements.
+Do not add any new authority URIs while fixing issues.</code></pre>
 <p>The validation skill checks against nine categories and reports PASS, WARN, or FAIL for each. Fix any issues:</p>
-<pre><code>Fix the warnings and regenerate the Turtle.</code></pre>
+<pre><code>Fix the warnings and regenerate the Turtle. Continue to leave Wikidata
+QIDs and other authority URIs out --- mint LINCS URIs only.</code></pre>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Inspect the regenerated Turtle
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After Claude regenerates, scan the file again for <code>wd:Q…</code> or other authority URIs you did not put there. The skills’ built-in “use authorities where possible” guidance often pulls them back in even after you have asked Claude not to. If you see new ones, delete them and tell Claude again.</p>
+</div>
+</div>
 </section>
 <section id="step-5-scale-up" class="level2">
 <h2 class="anchored" data-anchor-id="step-5-scale-up">Step 5: Scale Up</h2>
 <p>Now ask Claude Code to handle more of the dataset:</p>
 <pre><code>Convert all boundary changes from the Treaty of Paris (1763) into
 LINCS-compatible Turtle. Include the treaty as an event, the
-territories that changed sovereignty, and the sovereign entities.</code></pre>
+territories that changed sovereignty, and the sovereign entities.
+Mint LINCS URIs for all entities --- do not insert any Wikidata QIDs
+or other authority URIs.</code></pre>
 <p>Or try a broader conversion:</p>
 <pre><code>Write a Python script that reads boundaries_poly.csv and generates
 LINCS-compatible Turtle for all territories. Use the patterns we
-established for Rupert's Land. Save the output as canada_boundaries.ttl.</code></pre>
+established for Rupert's Land, including LINCS-only URIs (no
+hallucinated Wikidata QIDs). Save the output as canada_boundaries.ttl.</code></pre>
 </section>
-<section id="step-6-disambiguate-places-if-time-allows" class="level2">
-<h2 class="anchored" data-anchor-id="step-6-disambiguate-places-if-time-allows">Step 6: Disambiguate Places (If Time Allows)</h2>
-<p>If you want to ground your places to Wikidata:</p>
+<section id="step-6-disambiguate-places-demo-only" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-disambiguate-places-demo-only">Step 6: Disambiguate Places (Demo Only)</h2>
+<p>Eventually you will want to ground each place in your data to a real Wikidata entity so other LINCS datasets can link to yours. The <code>/place-disambig</code> skill is designed for this:</p>
 <pre><code>/place-disambig
 Disambiguate "Rupert's Land" to a Wikidata QID.</code></pre>
-<p>This uses the Wikidata MCP server (if configured) or Claude Code’s knowledge to find the correct Wikidata entity. The QID can then be added to your Turtle as an <code>owl:sameAs</code> or <code>skos:exactMatch</code> link.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why this is a demo and not a real workshop step
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The skill is built around the <a href="https://wd-mcp.wmcloud.org/">Wikidata MCP server</a>, which lets Claude Code do a vector search against the live Wikidata index. <strong>The MCP server is not configured in your fresh workshop setup</strong>, so when you run the skill today Claude will fall back to guessing QIDs from memory — and as we just saw in Step 3, it is wrong far more often than it is right.</p>
+<p>We are showing you the skill so you know it exists and so you can set up the MCP after the workshop. For real entity grounding work, the workflow is:</p>
+<ol type="1">
+<li>Configure the Wikidata MCP server in <code>.claude/mcp.json</code> (5–10 minutes, see the <a href="https://wd-mcp.wmcloud.org/">WikidataMCP project</a>)</li>
+<li>Re-run <code>/place-disambig</code> — it will now do live vector lookups</li>
+<li>Verify each match by hand before adding it to your Turtle as <code>owl:sameAs</code> or <code>skos:exactMatch</code></li>
+</ol>
+<p>Even with the MCP, manual review is essential. Wikidata grounding is not a step to automate blindly.</p>
+</div>
+</div>
 </section>
 <section id="what-you-have-built" class="level2">
 <h2 class="anchored" data-anchor-id="what-you-have-built">What You Have Built</h2>
